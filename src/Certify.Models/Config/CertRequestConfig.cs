@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -300,6 +300,11 @@ namespace Certify.Models
         /// If set, the preferred number of days the certificate should expire (e.g. 14 or 0.5). Support for this will vary by CA.
         /// </summary>
         public float? PreferredExpiryDays { get; set; }
+
+        /// <summary>
+        /// If set, specifies the preferred ACME profile to request (if the selected CA offers a profile with this name)
+        /// </summary>
+        public string? AcmeProfile { get; set; }
 
         public void ApplyDeploymentOptionDefaults()
         {
