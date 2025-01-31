@@ -184,7 +184,7 @@ namespace Certify.Management
         /// <summary>
         ///  if true, additional management hub features and data stores may be enabled
         /// </summary>
-        public bool IsManagementHub { get; set; }
+        public bool IsManagementHubService { get; set; }
     }
 
     public class SettingsManager
