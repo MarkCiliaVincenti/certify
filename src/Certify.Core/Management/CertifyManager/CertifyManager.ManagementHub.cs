@@ -38,6 +38,11 @@ namespace Certify.Management
             return new ActionStep("Updated Management Hub", "OK", false);
         }
 
+        public void SetDirectManagementClient(IManagementServerClient client)
+        {
+            _managementServerClient = client;
+        }
+
         private async Task EnsureMgmtHubConnection()
         {
             // connect/reconnect to management hub if enabled
@@ -86,7 +91,7 @@ namespace Certify.Management
 
             if (_managementServerClient != null)
             {
-                _managementServerClient.OnGetCommandResult -= PerformDirectHubCommandWithResult;
+                _managementServerClient.OnGetCommandResult -= PerformHubCommandWithResult;
                 _managementServerClient.OnConnectionReconnecting -= _managementServerClient_OnConnectionReconnecting;
             }
 
@@ -96,7 +101,7 @@ namespace Certify.Management
             {
                 await _managementServerClient.ConnectAsync();
 
-                _managementServerClient.OnGetCommandResult += PerformDirectHubCommandWithResult;
+                _managementServerClient.OnGetCommandResult += PerformHubCommandWithResult;
                 _managementServerClient.OnConnectionReconnecting += _managementServerClient_OnConnectionReconnecting;
             }
             catch (Exception ex)
@@ -107,7 +112,7 @@ namespace Certify.Management
             }
         }
 
-        public async Task<InstanceCommandResult> PerformDirectHubCommandWithResult(InstanceCommandRequest arg)
+        public async Task<InstanceCommandResult> PerformHubCommandWithResult(InstanceCommandRequest arg)
         {
             object val = null;
 

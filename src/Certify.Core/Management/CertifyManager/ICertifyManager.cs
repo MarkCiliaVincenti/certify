@@ -87,8 +87,9 @@ namespace Certify.Management
         Task<ActionResult> CleanupManagedChallengeRequest(ManagedChallengeRequest request);
 
         Task<ActionStep> UpdateManagementHub(string url, string joiningKey);
-        Task<InstanceCommandResult> PerformDirectHubCommandWithResult(InstanceCommandRequest arg);
+        Task<InstanceCommandResult> PerformHubCommandWithResult(InstanceCommandRequest arg);
 
+        void SetDirectManagementClient(IManagementServerClient client);
         ManagedInstanceInfo GetManagedInstanceInfo();
     }
 }
